@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%ghr**@vjn&&*wnij!vv^$7k7)o$h3*q=m9=q6rm*oas1lr9$c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -63,11 +64,18 @@ WSGI_APPLICATION = 'chronicles.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='postgres://username:password@hostname:port/dbname',
+        conn_max_age=600
+    )
 }
 
 
@@ -111,6 +119,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIR = [
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/submit/'
