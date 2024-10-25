@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'chronicles.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://myuser:mypassword@mydb.render.com:5432/mydatabase',
+        default='postgres://sh4cker:G6RdclRX3PDHuTNMTfKy9ZBZTtoaMRgd@dpg-csdecrdsvqrc738u84cg-a:5432/articles_qenr',
         conn_max_age=600
     )
 }
